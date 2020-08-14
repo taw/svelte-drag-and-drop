@@ -1,8 +1,8 @@
 <script>
-	import Item from "./Item.svelte";
-	import { createEventDispatcher } from "svelte";
+  import Item from "./Item.svelte";
+  import { createEventDispatcher } from "svelte";
 
-	const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
   export let items;
   export let key;

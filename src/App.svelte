@@ -1,49 +1,49 @@
 <script>
-	import Container from "./Container.svelte";
+  import Container from "./Container.svelte";
 
-	let currentdrag = {};
+  let currentdrag = {};
 
-	let data = [
-		["A", "B", "C"],
-		["D", "E", "F"],
-	]
+  let data = [
+    ["A", "B", "C"],
+    ["D", "E", "F"],
+  ]
 
-	function ondragend() {
-		currentdrag = {};
-	}
-
-  function ondragitemend(event) {
-		let {itemKey, sourceContainerKey} = currentdrag;
-		let {targetContainerKey} = event.detail;
-		let sourceContainer = data[sourceContainerKey];
-		let targetContainer = data[targetContainerKey];
-		let item = sourceContainer[itemKey];
-		sourceContainer.splice(itemKey, 1)
-		targetContainer.push(item)
-		data = data;
+  function ondragend() {
+    currentdrag = {};
   }
 
-	function ondragitemstart(event) {
-		currentdrag = event.detail;
+  function ondragitemend(event) {
+    let {itemKey, sourceContainerKey} = currentdrag;
+    let {targetContainerKey} = event.detail;
+    let sourceContainer = data[sourceContainerKey];
+    let targetContainer = data[targetContainerKey];
+    let item = sourceContainer[itemKey];
+    sourceContainer.splice(itemKey, 1)
+    targetContainer.push(item)
+    data = data;
+  }
+
+  function ondragitemstart(event) {
+    currentdrag = event.detail;
   }
 </script>
 
 <div class="App">
-	<header>
-		Drag and Drop
-	</header>
-	{#each data as items, key }
-		<Container {items} {key} on:dragitemstart={ondragitemstart} on:dragitemend={ondragitemend} />
-	{/each}
+  <header>
+    Drag and Drop
+  </header>
+  {#each data as items, key }
+    <Container {items} {key} on:dragitemstart={ondragitemstart} on:dragitemend={ondragitemend} />
+  {/each}
 </div>
 
 <style>
-	.App {
-	  display: grid;
-	  min-height: 100vh;
-	  grid-template-rows: 100px 1fr;
-	  grid-template-columns: 1fr 1fr;
-	}
+  .App {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 100px 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
 
   header {
     font-size: 64px;
